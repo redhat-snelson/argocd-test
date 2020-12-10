@@ -14,6 +14,9 @@ spec:
     path: charts/jenkins
     repoURL: https://github.com/jenkinsci/helm-charts
     targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
 
     # path: apps/jenkins
     # repoURL: {{ .Values.spec.source.repoURL }}
