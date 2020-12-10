@@ -1,0 +1,5 @@
+spec:
+  securityContext:
+    runAsUser: 1000670000
+    runAsGroup: 1000670000
+    fsGroup: 1000670000
