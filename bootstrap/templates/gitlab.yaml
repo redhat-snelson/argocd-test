@@ -11,9 +11,8 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: /
-    repoURL: https://gitlab.com/gitlab-org/charts/gitlab
-    targetRevision: HEAD
+    repoURL: https://charts.gitlab.io/
+    chart: gitlab
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
