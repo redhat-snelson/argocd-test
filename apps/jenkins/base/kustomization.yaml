@@ -9,4 +9,4 @@ namespace: jenkins
 #   app: bingo
 
 resources:
-- github.com/jenkinsci/helm-charts/charts/jenkins?ref=main
+- github.com/jenkinsci/helm-charts/tree/master/charts/jenkins?ref=main
