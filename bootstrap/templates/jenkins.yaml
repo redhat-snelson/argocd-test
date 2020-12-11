@@ -11,13 +11,13 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/jenkins/overlays/prod
+    # repoURL: {{ .Values.spec.source.repoURL }}
+    # targetRevision: {{ .Values.spec.source.targetRevision }}
+    # path: apps/jenkins/overlays/prod
 
-    # repoURL: https://charts.jenkins.io
-    # chart: jenkins
-    # targetRevision: 3.0.6
+    repoURL: https://charts.jenkins.io
+    chart: jenkins
+    targetRevision: 3.0.6
     helm:
       version: v3
 
