@@ -21,10 +21,12 @@ spec:
     helm:
       version: v3
       parameters:
-      - name: "controller.runAsUser"
-        value: "1000650000"
-      - name: "controller.fsGroup"
-        value: "1000650000"
+      - name: "controller.usePodSecurityContext"
+        value: "false"
+      # - name: "controller.runAsUser"
+      #   value: "1000650000"
+      # - name: "controller.fsGroup"
+      #   value: "1000650000"
 
     # repoURL: https://github.com/jenkinsci/helm-charts
     # path: charts/jenkins
