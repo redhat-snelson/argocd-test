@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- github.com/jenkinsci/helm-charts/tree/master/charts/jenkins?ref=main
+- https://github.com/jenkinsci/helm-charts/tree/master/charts/jenkins?ref=main
 # namespace: jenkins
 # commonLabels:
 #   someName: someValue
