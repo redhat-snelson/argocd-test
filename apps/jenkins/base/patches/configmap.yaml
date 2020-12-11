@@ -1,0 +1,46 @@
+﻿kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: jenkins
+  namespace: jenkins
+  labels:
+    app.kubernetes.io/component: jenkins-controller
+    app.kubernetes.io/instance: jenkins
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: jenkins
+data:
+  apply_config.sh: |-
+    set -e
+    echo "disable Setup Wizard"
+    # Prevent Setup Wizard when JCasC is enabled
+    echo $JENKINS_VERSION > /var/jenkins_home/jenkins.install.UpgradeWizard.state
+    echo $JENKINS_VERSION > /var/jenkins_home/jenkins.install.InstallUtil.lastExecVersion
+    echo "download plugins"
+    # Install missing plugins
+    echo "copy plugins.txt"
+    cp /var/jenkins_config/plugins.txt /var/jenkins_home;
+    echo "remove plugin locks"
+    rm -rf /usr/share/jenkins/ref/plugins/*.lock
+    echo "version fuction"
+    version () { echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; }
+    echo "update plugins"
+    if [ -f "/usr/share/jenkins/jenkins.war" ] &&
+       [ -n "$(command -v jenkins-plugin-cli)" 2>/dev/null ] &&
+       [ $(version $(jenkins-plugin-cli --version)) -ge $(version "2.1.1") ]
+    then
+      echo "Option 1"
+      # jenkins-plugin-cli --war "/usr/share/jenkins/jenkins.war" --plugin-file "/var/jenkins_home/plugins.txt";
+      /usr/local/bin/install-plugins.sh `echo $(cat /var/jenkins_home/plugins.txt)`;
+    else
+      echo "Option 2"
+      /usr/local/bin/install-plugins.sh `echo $(cat /var/jenkins_home/plugins.txt)`;
+    fi
+    echo "copy plugins to shared volume"
+    # Copy plugins to shared volume
+    yes n | cp -i /usr/share/jenkins/ref/plugins/* /var/jenkins_plugins/;
+    echo "finished initialization"
+  plugins.txt: |-
+    kubernetes:1.27.6
+    workflow-aggregator:2.6
+    git:4.4.5
+    configuration-as-code:1.46
