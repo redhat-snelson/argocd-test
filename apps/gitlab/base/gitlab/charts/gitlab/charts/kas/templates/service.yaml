@@ -1,0 +1,25 @@
+{{- if .Values.global.kas.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "fullname" . }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "gitlab.standardLabels" . | nindent 4 }}
+  annotations:
+    {{- include "gitlab.serviceAnnotations" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.externalPort }}
+      targetPort: {{ .Values.service.internalPort }}
+      protocol: TCP
+      name: tcp-{{ template "name" . }}
+    - port: {{ .Values.service.externalObservabilityPort }}
+      targetPort: {{ .Values.service.internalObservabilityPort }}
+      protocol: TCP
+      name: tcp-{{ template "name" . }}-metrics
+  selector:
+    app: {{ template "name" . }}
+    release: {{ .Release.Name }}
+{{- end -}}
