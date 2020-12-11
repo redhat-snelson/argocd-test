@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/jenkins
+    path: apps/jenkins/overlays/prod
 
     # repoURL: https://charts.jenkins.io
     # chart: jenkins
