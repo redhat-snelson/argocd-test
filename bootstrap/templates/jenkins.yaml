@@ -11,15 +11,17 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    # path: apps/jenkins
-    # repoURL: {{ .Values.spec.source.repoURL }}
-    # targetRevision: {{ .Values.spec.source.targetRevision }}
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: apps/jenkins
+
     # repoURL: https://charts.jenkins.io
     # chart: jenkins
     # targetRevision: 3.0.6
-    repoURL: https://github.com/jenkinsci/helm-charts
-    path: charts/jenkins
-    targetRevision: HEAD
+
+    # repoURL: https://github.com/jenkinsci/helm-charts
+    # path: charts/jenkins
+    # targetRevision: HEAD
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
