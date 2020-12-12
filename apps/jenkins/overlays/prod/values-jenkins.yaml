@@ -3,4 +3,4 @@ controller:
   fsGroup: 1000650000
   runAsUser: 1000650000
   route:
-    enabled: true
+    enabled: "true"
