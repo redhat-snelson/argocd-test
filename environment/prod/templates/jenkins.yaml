@@ -11,6 +11,9 @@ spec:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
     path: apps/jenkins/overlays/prod
+    helm:
+      valueFiles:
+      - values-jenkins.yaml
   destination:
     namespace: jenkins
     server: {{ .Values.spec.destination.server }}
