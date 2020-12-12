@@ -8,23 +8,25 @@ metadata:
 spec:
   project: default
   source:
-    # repoURL: https://charts.jenkins.io
-    # chart: jenkins
-    # targetRevision: 3.0.6 # Jenkins Helm Chart Version
-    # helm:
-    #   version: v3
-    #   parameters:
-    #   - name: "controller.runAsUser"
-    #     value: "1000650000"
-    #   - name: "controller.fsGroup"
-    #     value: "1000650000"
-    #   - name: "controller.installPlugins"
-    #     value: ""
-    #   - name: "controller.route.enabled"
-    #     value: "true"
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/jenkins/overlays/prod
+    repoURL: https://charts.jenkins.io
+    chart: jenkins
+    targetRevision: 3.0.6 # Jenkins Helm Chart Version
+    helm:
+      version: v3
+      parameters:
+      - name: "controller.runAsUser"
+        value: "1000650000"
+      - name: "controller.fsGroup"
+        value: "1000650000"
+      - name: "controller.installPlugins"
+        value: ""
+      - name: "controller.route.enabled"
+        value: "true"
+    # repoURL: {{ .Values.spec.source.repoURL }}
+    # targetRevision: {{ .Values.spec.source.targetRevision }}
+    # path: apps/jenkins/overlays/prod
+    # kustomize:
+    #   version: v3.5.4
   destination:
     namespace: jenkins
     server: {{ .Values.spec.destination.server }}

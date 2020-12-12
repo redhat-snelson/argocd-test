@@ -1,0 +1,5 @@
+apiVersion: v2
+name: mychart
+version: v1.0.0
+sources:
+- https://github.com/jenkinsci/helm-charts//charts/jenkins?ref=HEAD
