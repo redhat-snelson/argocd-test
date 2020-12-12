@@ -8,12 +8,15 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/jenkins/overlays/prod
+    repoURL: https://github.com/redhat-snelson/argocd-test
+    targetRevision: HEAD
+    path: apps/jenkins/base/charts/jenkins
+    helm:
+      valueFiles:
+      - ../values-jenkins.yaml
   destination:
     namespace: jenkins
-    server: {{ .Values.spec.destination.server }}
+    server: https://kubernetes.default.svc
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
