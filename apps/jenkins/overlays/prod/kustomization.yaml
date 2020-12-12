@@ -1,7 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ../../base/
+- ../../base/jenkins/Chart.yaml
+patches:
+- patch-scc.yaml
+
 # resources:
 # - values.yaml
 # - https://github.com/jenkinsci/helm-charts//charts/jenkins?ref=HEAD
