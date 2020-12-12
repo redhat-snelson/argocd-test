@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/jenkins/overlays/prod
+    path: apps/jenkins/base
     helm:
       valueFiles:
       - values-jenkins.yaml
