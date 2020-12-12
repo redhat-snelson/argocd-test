@@ -27,6 +27,8 @@ spec:
         value: "1000650000"
       - name: "controller.installPlugins"
         value: ""
+      - name: "controller.route.enable"
+        value: "true"
 
     # repoURL: https://github.com/jenkinsci/helm-charts
     # path: charts/jenkins
