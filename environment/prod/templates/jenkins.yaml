@@ -10,10 +10,15 @@ spec:
   source:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/jenkins/base
+    path: apps/jenkins/base/charts/jenkins
     helm:
-      valueFiles:
-      - values-jenkins.yaml
+      values: |-
+        controller:
+          installPlugins: []
+          fsGroup: 1000650000
+          runAsUser: 1000650000
+          route:
+            enabled: true
   destination:
     namespace: jenkins
     server: {{ .Values.spec.destination.server }}
