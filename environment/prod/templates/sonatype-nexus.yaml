@@ -16,10 +16,9 @@ spec:
       values: |-
         statefulset:
           enabled: false
-        # nexus:
-        #   securityContextEnabled: false
-        #   securityContext:
-        #     fsGroup: 1000650000
+        nexus:
+          securityContext:
+            fsGroup: 1000650000
         #     runAsUser: 1000650000
         persistence:
           enabled: true
