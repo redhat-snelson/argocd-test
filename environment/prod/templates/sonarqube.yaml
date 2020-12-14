@@ -18,7 +18,6 @@ spec:
           enabled: true
           createSCC: true
         securityContext:
-          privileged: true
           fsGroup: 1000660000
         containerSecurityContext:
           runAsUser: 1000660000
