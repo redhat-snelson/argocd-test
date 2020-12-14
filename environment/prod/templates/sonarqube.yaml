@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-sonarqube
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: apps/sonarqube/base/charts/sonarqube
+    helm:
+      values: |-
+        OpenShift:
+          enabled: true
+          # createSCC: true
+        securityContext:
+          fsGroup: 1000650000
+        containerSecurityContext
+          runAsUser: 1000650000
+  destination:
+    namespace: sonarqube
+    server: {{ .Values.spec.destination.server }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

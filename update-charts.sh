@@ -12,7 +12,7 @@ add_repos() {
 }
 
 apps="jenkins/jenkins
-      center/jfrog/artifactory
+      center/jfrog/artifactory-oss
       center/bitnami/keycloak
       oteemocharts/sonarqube
       oteemocharts/sonatype-nexus"
