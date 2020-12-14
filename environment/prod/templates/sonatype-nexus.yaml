@@ -17,7 +17,7 @@ spec:
         statefulset:
           enabled: false
         nexus:
-          securityContextEnabled: true
+          securityContextEnabled: false
           # securityContext:
             # fsGroup: 1000650000
   destination:
