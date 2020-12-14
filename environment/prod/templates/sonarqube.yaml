@@ -16,30 +16,6 @@ spec:
       values: |-
         OpenShift:
           enabled: true
-          createSCC: false
-        securityContext:
-          fsGroup: 1000660000
-        containerSecurityContext:
-          runAsUser: 1000660000
-        initContainers:
-          securityContext:
-            privileged: false
-            fsGroup: 1000660000
-            runAsUser: 1000660000
-        initSysctl:
-          enabled: true
-          securityContext:
-            privileged: true
-        persistence:
-          enabled: false
-          storageClass: ocs-storagecluster-ceph-rbd
-        postgresql:
-          persistence:
-            storageClass: ocs-storagecluster-ceph-rbd
-          securityContext:
-            enabled: true
-            fsGroup: 1000660000
-            runAsUser: 1000660000
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
