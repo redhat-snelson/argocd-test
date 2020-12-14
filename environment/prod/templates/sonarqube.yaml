@@ -23,6 +23,7 @@ spec:
           runAsUser: 1000660000
         initContainers:
           securityContext:
+            privileged: false
             fsGroup: 1000660000
             runAsUser: 1000660000
         initSysctl:
