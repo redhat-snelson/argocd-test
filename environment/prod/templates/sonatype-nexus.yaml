@@ -19,7 +19,7 @@ spec:
         nexus:
           docker:
             enabled: false
-          # securityContext:
+          securityContext: {}
             # fsGroup: 1000650000
         persistence:
           storageClass: ocs-storagecluster-ceph-rbd
