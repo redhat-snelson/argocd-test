@@ -6,7 +6,7 @@ metadata:
   labels:
   {{- include "common.labels.standard" . | nindent 4 }}
   {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  annotations: {{- include "postgresql.tplValue" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
   podSelector:
@@ -28,11 +28,9 @@ spec:
         - podSelector:
             matchLabels:
             {{- include "common.labels.matchLabels" . | nindent 14 }}
-              role: read
+              role: slave
       {{- end }}
-    {{- if .Values.metrics.enabled }}
     # Allow prometheus scrapes
     - ports:
         - port: 9187
-    {{- end }}
 {{- end }}

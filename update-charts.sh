@@ -11,18 +11,18 @@ add_repos() {
     helm repo add jenkins https://charts.jenkins.io
 }
 
-apps="jenkins/jenkins
-      center/jfrog/artifactory-oss
-      center/bitnami/keycloak
-      oteemocharts/sonarqube
-      oteemocharts/sonatype-nexus"
+declare apps="jenkins/jenkins
+              center/jfrog/artifactory-oss
+              center/codecentric/keycloak
+              oteemocharts/sonarqube
+              oteemocharts/sonatype-nexus"
 
 for app in ${apps}
 do
-    app_repo=`dirname ${app}`
-    app_name=`basename ${app}`
-    dir_path="apps/${app_name}/base/charts"
+    declare app_repo=`dirname ${app}`
+    declare app_name=`basename ${app}`
+    declare dir_path="apps/${app_name}/base/charts"
     
-    # rm -rf ${dir_path}/${app_name}
+    rm -rf ${dir_path}/${app_name}
     helm pull ${app_repo}/${app_name} --untar --untardir ${dir_path}
 done

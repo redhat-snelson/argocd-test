@@ -1,43 +1,39 @@
-{{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled }}
+{{- range $key, $serviceMonitor := dict "wildfly" .Values.serviceMonitor "extra" .Values.extraServiceMonitor }}
+{{- with $serviceMonitor }}
+{{- if .enabled }}
+---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ template "keycloak.fullname" . }}
-  {{- if .Values.metrics.serviceMonitor.namespace }}
-  namespace: {{ .Values.metrics.serviceMonitor.namespace }}
-  {{- else }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "keycloak.fullname" $ }}-{{ $key }}
+  {{- with .namespace }}
+  namespace: {{ . }}
   {{- end }}
-  labels: {{- include "common.labels.standard" . | nindent 4 }}
-    app.kubernetes.io/component: keycloak
-    {{- if .Values.metrics.serviceMonitor.additionalLabels }}
-    {{- include "common.tplvalues.render" (dict "value" .Values.metrics.serviceMonitor.additionalLabels "context" $) | nindent 4 }}
+  {{- with .annotations }}
+  annotations:
+    {{- range $key, $value := . }}
+    {{- printf "%s: %s" $key (tpl $value $ | quote) | nindent 4 }}
     {{- end }}
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
-  {{- if .Values.commonAnnotations }}
-  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+  labels:
+  {{- include "keycloak.labels" $ | nindent 4 }}
+  {{- range $key, $value := .labels }}
+  {{- printf "%s: %s" $key (tpl $value $ | quote) | nindent 4 }}
   {{- end }}
 spec:
-  endpoints:
-    - port: http-management
-      {{- if .Values.metrics.serviceMonitor.interval }}
-      interval: {{ .Values.metrics.serviceMonitor.interval }}
-      {{- end }}
-      {{- if .Values.metrics.serviceMonitor.scrapeTimeout }}
-      scrapeTimeout: {{ .Values.metrics.serviceMonitor.scrapeTimeout }}
-      {{- end }}
-      {{- if .Values.metrics.serviceMonitor.honorLabels }}
-      honorLabels: {{ .Values.metrics.serviceMonitor.honorLabels }}
-      {{- end }}
-      {{- if .Values.metrics.serviceMonitor.relabellings }}
-      metricRelabelings: {{- toYaml .Values.metrics.serviceMonitor.relabellings | nindent 6 }}
-      {{- end }}
+  {{- with .namespaceSelector }}
   namespaceSelector:
-    matchNames:
-      - {{ .Release.Namespace }}
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
   selector:
-    matchLabels: {{- include "common.labels.matchLabels" . | nindent 6 }}
-      app.kubernetes.io/component: metrics
+    matchLabels:
+      {{- include "keycloak.selectorLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: http
+  endpoints:
+    - port: {{ .port }}
+      path: {{ .path }}
+      interval: {{ .interval }}
+      scrapeTimeout: {{ .scrapeTimeout }}
+{{- end }}
+{{- end }}
 {{- end }}

@@ -12,6 +12,7 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     path: apps/sonarqube/base/charts/sonarqube
     helm:
+      version: v3
       values: |-
         OpenShift:
           enabled: true
