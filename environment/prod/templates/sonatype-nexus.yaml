@@ -16,8 +16,8 @@ spec:
       values: |-
         nexus:
           securityContextEnabled: true
-          securityContext:
-            fsGroup: 1000650000
+          # securityContext:
+          #   fsGroup: 1000650000
   destination:
     namespace: nexus
     server: {{ .Values.spec.destination.server }}
