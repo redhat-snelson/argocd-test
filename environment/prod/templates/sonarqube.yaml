@@ -38,6 +38,7 @@ spec:
             enabled: true
             storageClass: ocs-storagecluster-ceph-rbd
           securityContext:
+            enabled: true
             fsGroup: 1000660000
             runAsUser: 1000660000
           volumePermissions:
