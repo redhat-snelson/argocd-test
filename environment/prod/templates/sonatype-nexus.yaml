@@ -1,30 +1,30 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: prod-nexus
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/sonatype-nexus/base/charts/sonatype-nexus
-    helm:
-      version: v2
-      values: |-
-        statefulset:
-          enabled: false
-        nexus:
-          securityContextEnabled: false
-          # securityContext:
-            # fsGroup: 1000650000
-        nexusProxy:
-          enabled: false
-  destination:
-    namespace: nexus
-    server: {{ .Values.spec.destination.server }}
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: prod-nexus
+#   namespace: argocd
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   source:
+#     repoURL: {{ .Values.spec.source.repoURL }}
+#     targetRevision: {{ .Values.spec.source.targetRevision }}
+#     path: apps/sonatype-nexus/base/charts/sonatype-nexus
+#     helm:
+#       version: v2
+#       values: |-
+#         statefulset:
+#           enabled: false
+#         nexus:
+#           securityContextEnabled: false
+#           # securityContext:
+#             # fsGroup: 1000650000
+#         nexusProxy:
+#           enabled: false
+#   destination:
+#     namespace: nexus
+#     server: {{ .Values.spec.destination.server }}
+#   syncPolicy:
+#     syncOptions:
+#       - CreateNamespace=true
