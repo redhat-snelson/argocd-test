@@ -10,17 +10,17 @@ spec:
   source:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    path: apps/sonatype-nexus/base/charts/sonatype-nexus
+    path: apps/nexus-repository-manager/base/charts/nexus-repository-manager
     helm:
       version: v2
       values: |-
         statefulset:
           enabled: false
-        nexus:
-          securityContextEnabled: false
-          securityContext:
-            fsGroup: 1000650000
-            runAsUser: 1000650000
+        # nexus:
+        #   securityContextEnabled: false
+        #   securityContext:
+        #     fsGroup: 1000650000
+        #     runAsUser: 1000650000
         persistence:
           enabled: true
           storageClass: ocs-storagecluster-ceph-rbd

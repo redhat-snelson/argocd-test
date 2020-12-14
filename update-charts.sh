@@ -15,7 +15,8 @@ declare apps="jenkins/jenkins
               center/jfrog/artifactory-oss
               center/codecentric/keycloak
               oteemocharts/sonarqube
-              oteemocharts/sonatype-nexus"
+              center/sonatype/nexus-repository-manager"
+            #   oteemocharts/sonatype-nexus"
 
 for app in ${apps}
 do
