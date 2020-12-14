@@ -21,9 +21,10 @@ spec:
           fsGroup: 1000660000
         containerSecurityContext:
           runAsUser: 1000660000
-        # initSysctl:
-        #   securityContext:
-        #     privileged: false
+        initSysctl:
+          enabled: false
+          securityContext:
+            privileged: false
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
