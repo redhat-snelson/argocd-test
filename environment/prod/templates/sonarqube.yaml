@@ -24,7 +24,7 @@ spec:
         initSysctl:
           enabled: true
           securityContext:
-            privileged: false
+            privileged: true
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
