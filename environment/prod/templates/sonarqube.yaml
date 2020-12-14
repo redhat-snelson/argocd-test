@@ -19,7 +19,7 @@ spec:
           # createSCC: true
         securityContext:
           fsGroup: 1000650000
-        containerSecurityContext
+        containerSecurityContext:
           runAsUser: 1000650000
   destination:
     namespace: sonarqube
