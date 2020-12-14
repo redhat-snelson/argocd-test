@@ -22,15 +22,15 @@ spec:
         containerSecurityContext:
           runAsUser: 1000660000
         elasticsearch:
-          configureNode: true
-          bootstrapChecks: true
+          configureNode: false
+          bootstrapChecks: false
         initContainers:
           securityContext:
-            privileged: false
+            privileged: true
             fsGroup: 1000660000
             runAsUser: 1000660000
         initSysctl:
-          enabled: true
+          enabled: false
           vmMaxMapCount: 524288
           fsFileMax: 131072
           nofile: 131072
