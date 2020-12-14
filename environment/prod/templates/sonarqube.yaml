@@ -24,16 +24,26 @@ spec:
         elasticsearch:
           configureNode: false
           bootstrapChecks: false
+        initContainers:
+          securityContext:
+            fsGroup: 1000660000
+            runAsUser: 1000660000
         initSysctl:
           enabled: false
+        persistence:
+          enabled: true
+          storageClass: ocs-storagecluster-ceph-rbd
         postgresql:
+          persistence:
+            enabled: true
+            storageClass: ocs-storagecluster-ceph-rbd
           securityContext:
             fsGroup: 1000660000
             runAsUser: 1000660000
           volumePermissions:
-            enabled: false
+            enabled: true
             securityContext:
-              runAsUser: 0
+              runAsUser: 1000660000
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
