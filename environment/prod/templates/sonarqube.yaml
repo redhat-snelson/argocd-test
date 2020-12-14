@@ -24,10 +24,10 @@ spec:
         elasticsearch:
           configureNode: false
           bootstrapChecks: false
-        initContainers:
-          securityContext:
-            fsGroup: 1000660000
-            runAsUser: 1000660000
+        # initContainers:
+        #   securityContext:
+        #     fsGroup: 1000660000
+        #     runAsUser: 1000660000
         initSysctl:
           enabled: false
         persistence:
@@ -37,9 +37,9 @@ spec:
           persistence:
             enabled: true
             storageClass: ocs-storagecluster-ceph-rbd
-          securityContext:
-            fsGroup: 1000660000
-            runAsUser: 1000660000
+          # securityContext:
+          #   fsGroup: 1000660000
+          #   runAsUser: 1000660000
           volumePermissions:
             enabled: true
             securityContext:
