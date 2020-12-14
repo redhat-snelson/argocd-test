@@ -18,13 +18,10 @@ spec:
           enabled: true
           createSCC: true
         securityContext:
+          privileged: true
           fsGroup: 1000660000
         containerSecurityContext:
           runAsUser: 1000660000
-        initSysctl:
-          enabled: true
-          securityContext:
-            privileged: true
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
