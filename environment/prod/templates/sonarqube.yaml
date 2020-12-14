@@ -23,6 +23,14 @@ spec:
           runAsUser: 1000660000
         persistence:
           enabled: false
+          storageClass: ocs-storagecluster-ceph-rbd
+        postgresql:
+          persistence:
+            storageClass: ocs-storagecluster-ceph-rbd
+          securityContext:
+            enabled: true
+            fsGroup: 1000660000
+            runAsUser: 1000660000
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
