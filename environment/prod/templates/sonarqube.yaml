@@ -16,6 +16,43 @@ spec:
       values: |-
         OpenShift:
           enabled: true
+          createSCC: true
+        securityContext:
+          fsGroup: 1000660000
+        containerSecurityContext:
+          runAsUser: 1000660000
+        elasticsearch:
+          configureNode: true
+          bootstrapChecks: true
+        initContainers:
+          securityContext:
+            privileged: false
+            fsGroup: 1000660000
+            runAsUser: 1000660000
+        initSysctl:
+          enabled: true
+          vmMaxMapCount: 524288
+          fsFileMax: 131072
+          nofile: 131072
+          nproc: 8192
+          securityContext:
+            privileged: true
+        persistence:
+          enabled: true
+          storageClass: ocs-storagecluster-ceph-rbd
+        postgresql:
+          enabled: true
+          persistence:
+            enabled: true
+            storageClass: ocs-storagecluster-ceph-rbd
+          securityContext:
+            enabled: false
+            fsGroup: 1000660000
+            runAsUser: 1000660000
+          volumePermissions:
+            enabled: false
+            securityContext:
+              runAsUser: 0
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
