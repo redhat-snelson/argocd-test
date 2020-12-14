@@ -12,8 +12,9 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     path: apps/sonatype-nexus/base/charts/sonatype-nexus
     helm:
-      values: |-
-        nexus:
+      version: v2
+      # values: |-
+        # nexus:
           # securityContextEnabled: true
           # securityContext:
             # fsGroup: 1000650000
