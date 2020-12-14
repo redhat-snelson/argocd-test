@@ -20,6 +20,8 @@ spec:
           securityContextEnabled: false
           # securityContext:
             # fsGroup: 1000650000
+        nexusProxy:
+          enabled: false
   destination:
     namespace: nexus
     server: {{ .Values.spec.destination.server }}
