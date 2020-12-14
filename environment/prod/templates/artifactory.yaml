@@ -13,6 +13,8 @@ spec:
     path: apps/artifactory-oss/base/charts/artifactory-oss
     helm:
       version: v2
+      # values: |-
+        # artifactory:
   destination:
     namespace: artifactory
     server: {{ .Values.spec.destination.server }}

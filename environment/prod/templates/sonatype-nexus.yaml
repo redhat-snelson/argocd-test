@@ -13,13 +13,11 @@ spec:
     path: apps/sonatype-nexus/base/charts/sonatype-nexus
     helm:
       version: v2
-      # values: |-
-        # nexus:
-          # securityContextEnabled: true
-          # securityContext:
-            # fsGroup: 1000650000
-        # route:
-          # enabled: true
+      values: |-
+        nexus:
+          securityContextEnabled: true
+          securityContext:
+            fsGroup: 1000650000
   destination:
     namespace: nexus
     server: {{ .Values.spec.destination.server }}
