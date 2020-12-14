@@ -19,9 +19,7 @@ spec:
         nexus:
           securityContext:
             fsGroup: 1000650000
-        #     runAsUser: 1000650000
         persistence:
-          enabled: true
           storageClass: ocs-storagecluster-ceph-rbd
   destination:
     namespace: nexus
