@@ -16,7 +16,7 @@ spec:
       values: |-
         OpenShift:
           enabled: true
-          createSCC: true
+          createSCC: false
         securityContext:
           fsGroup: 1000660000
         containerSecurityContext:
