@@ -21,6 +21,8 @@ spec:
           fsGroup: 1000660000
         containerSecurityContext:
           runAsUser: 1000660000
+        persistence:
+          enabled: false
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
