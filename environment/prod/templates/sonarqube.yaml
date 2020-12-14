@@ -22,7 +22,7 @@ spec:
         containerSecurityContext:
           runAsUser: 1000660000
         initSysctl:
-          enabled: true
+          enabled: false
           securityContext:
             privileged: false
         persistence:
