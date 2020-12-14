@@ -26,6 +26,14 @@ spec:
           bootstrapChecks: false
         initSysctl:
           enabled: false
+        postgresql:
+          securityContext:
+            fsGroup: 1000660000
+            runAsUser: 1000660000
+          volumePermissions:
+            enabled: false
+            securityContext:
+              runAsUser: 0
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
