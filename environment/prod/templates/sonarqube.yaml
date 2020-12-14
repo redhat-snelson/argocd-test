@@ -43,7 +43,7 @@ spec:
           volumePermissions:
             enabled: true
             securityContext:
-              runAsUser: 1000660000
+              runAsUser: auto
   destination:
     namespace: sonarqube
     server: {{ .Values.spec.destination.server }}
