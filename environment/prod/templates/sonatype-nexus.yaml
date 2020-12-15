@@ -17,7 +17,7 @@ spec:
         statefulset:
           enabled: false
         securityContext:
-          fsGroup: 1000650000
+          runAsUser: 1000650000
         nexus:
           docker:
             enabled: false
