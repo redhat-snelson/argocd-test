@@ -17,12 +17,12 @@ spec:
         statefulset:
           enabled: false
         securityContext:
-          runAsUser: 1000650000
+          runAsUser: 1000600000
         nexus:
           docker:
             enabled: false
           securityContext:
-            fsGroup: 1000650000
+            fsGroup: 1000600000
         persistence:
           storageClass: ocs-storagecluster-ceph-rbd
   destination:
