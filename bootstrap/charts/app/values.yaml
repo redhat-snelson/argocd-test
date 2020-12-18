@@ -1,0 +1,26 @@
+global:
+  project: 
+  repoURL: 
+  path: 
+  server: https://kubernetes.default.svc
+  targetRevision: HEAD
+  environment: 
+
+# RepoURL for path
+# repoURL: 
+
+# Path within repo relative to base url
+path: 
+
+# Sync-wave to annotate application to
+wave: "0"
+
+# Cluster to deploy to
+# server: 
+
+# Namespace where to sync resources
+namespace: 
+
+syncPolicy:
+  prune: true
+  selfHeal: true

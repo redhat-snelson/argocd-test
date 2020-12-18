@@ -1,0 +1,151 @@
+apiVersion: v2
+name: umbrella
+version: "0.1.0"
+description: Chart dedicated to building umbrella app to orchestrate ArgoCD app of apps
+
+# Applications within values.yaml must also be added in this dependency list in order to add them to the orchestrating umbrella app.
+
+dependencies:
+- name: app
+  alias: istio
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: istio.enabled
+  
+- name: app
+  alias: ingress
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: ingress.enabled
+
+- name: app
+  alias: monitoring
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: monitoring.enabled
+
+- name: app
+  alias: cert-manager
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: cert-manager.enabled
+
+- name: app
+  alias: twistlock
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: twistlock.enabled
+
+- name: app
+  alias: aws-ebs-csi-driver
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: aws-ebs-csi-driver.enabled
+
+- name: app
+  alias: psql-operator
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: psql-operator.enabled
+
+- name: app
+  alias: minio-operator
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: minio-operator.enabled
+
+- name: app
+  alias: eck
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: eck.enabled
+
+- name: app
+  alias: fluentd
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: fluentd.enabled
+
+- name: app
+  alias: vault
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: vault.enabled
+
+- name: app
+  alias: anchore
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: anchore.enabled
+
+- name: app
+  alias: rancher
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: rancher.enabled
+
+- name: app
+  alias: mattermost
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: mattermost.enabled
+
+- name: app
+  alias: gitlab
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: gitlab.enabled
+
+- name: app
+  alias: jira
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: jira.enabled
+
+- name: app
+  alias: harbor
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: harbor.enabled
+
+- name: app
+  alias: sonarqube
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: sonarqube.enabled
+
+- name: app
+  alias: artifactory
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: artifactory.enabled
+
+- name: app
+  alias: nexus
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: nexus.enabled
+
+- name: app
+  alias: tenant-projects
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: tenant-projects.enabled
+
+- name: app
+  alias: keel
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: keel.enabled
+
+- name: app
+  alias: keycloak
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: keycloak.enabled
+
+- name: app
+  alias: atlantis
+  version: 0.1.0
+  repository: file://../charts/app/
+  condition: atlantis.enabled

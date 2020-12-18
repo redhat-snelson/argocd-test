@@ -1,0 +1,6 @@
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: notImportantHere
+chartName: jfrog/artifactory-oss
+chartRepoUrl: https://repo.chartcenter.io

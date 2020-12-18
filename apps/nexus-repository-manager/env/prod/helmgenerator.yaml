@@ -1,0 +1,10 @@
+apiVersion: homelab.hyperkineticnerd.dev/v1beta1
+kind: HelmGenerator
+metadata:
+  name: helmGenerator
+release: artifactory
+chartPath: ../../base/
+namespace: artifactory
+valueFiles:
+- ../../base/values.yaml
+- values.yaml

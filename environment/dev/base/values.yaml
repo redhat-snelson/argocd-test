@@ -1,4 +1,7 @@
 spec:
+  environment:
+    name: dev
+    longName: development
   destination:
     server: https://kubernetes.default.svc
   source:

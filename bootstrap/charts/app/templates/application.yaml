@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  namespace: {{ .Release.Namespace }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    {{- if .Values.wave }}
+    argocd.argoproj.io/sync-wave: {{ .Values.wave | quote }}
+    {{- end }}
+spec:
+  project: {{ .Values.project | default .Values.global.project }}
+  targetRevision: {{ .Values.targetRevision | default .Values.global.targetRevision }}
+
+  source:
+    repoURL: {{ .Values.repoURL | default .Values.global.repoURL }}
+    path: apps/{{ .Chart.Name }}/env/{{ .Values.environment | default .Values.global.environment }}
+    targetRevision: {{ .Values.targetRevision | default .Values.global.targetRevision }}
+
+  destination:
+    server: {{ .Values.server | default .Values.global.server }}
+    namespace: {{ .Values.environment | default .Values.global.environment }}-{{ .Values.namespace }}
+
+  syncPolicy:
+    automated:
+      prune: {{ .Values.syncPolicy.prune | default true }}
+      selfHeal: {{ .Values.syncPolicy.selfHeal | default true }}
+    syncOptions:
+      - CreateNamespace=true
+
+{{- if .Values.ignoreDifferences }}
+  ignoreDifferences:
+{{- toYaml .Values.ignoreDifferences | nindent 4 }}
+{{- end }}

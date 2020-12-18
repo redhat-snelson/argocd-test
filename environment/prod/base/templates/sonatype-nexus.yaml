@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-nexus
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: apps/nexus-repository-manager/base/charts/nexus-repository-manager
+    helm:
+      version: v2
+      values: |-
+        statefulset:
+          enabled: false
+        securityContext:
+          runAsUser: 1000600000
+        nexus:
+          docker:
+            enabled: false
+          securityContext:
+            fsGroup: 1000600000
+        persistence:
+          storageClass: ocs-storagecluster-ceph-rbd
+  destination:
+    namespace: nexus
+    server: {{ .Values.spec.destination.server }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

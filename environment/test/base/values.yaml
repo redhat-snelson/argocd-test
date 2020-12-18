@@ -1,4 +1,7 @@
 spec:
+  environment:
+    name: prod
+    longName: production
   destination:
     server: https://kubernetes.default.svc
   source:

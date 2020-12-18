@@ -1,0 +1,6 @@
+apiVersion: builtin
+kind: HelmChartInflationGenerator
+metadata:
+  name: notImportantHere
+chartName: sonarqube
+chartRepoUrl: https://oteemo.github.io/charts

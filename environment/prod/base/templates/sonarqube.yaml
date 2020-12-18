@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prod-sonarqube
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: apps/sonarqube/base/charts/sonarqube
+    helm:
+      version: v3
+      values: |-
+        OpenShift:
+          enabled: true
+          createSCC: true
+        securityContext:
+          fsGroup: 1000660000
+        containerSecurityContext:
+          runAsUser: 1000660000
+        elasticsearch:
+          configureNode: false
+          bootstrapChecks: false
+        # initContainers:
+        #   securityContext:
+        #     fsGroup: 1000660000
+        #     runAsUser: 1000660000
+        initSysctl:
+          enabled: false
+        persistence:
+          enabled: true
+          storageClass: ocs-storagecluster-ceph-rbd
+        postgresql:
+          persistence:
+            enabled: true
+            storageClass: ocs-storagecluster-ceph-rbd
+          securityContext:
+            enabled: true
+            fsGroup: 1000660000
+            runAsUser: 1000660000
+          volumePermissions:
+            enabled: true
+            securityContext:
+              runAsUser: auto
+  destination:
+    namespace: sonarqube
+    server: {{ .Values.spec.destination.server }}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

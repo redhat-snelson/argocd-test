@@ -1,0 +1,125 @@
+# Each app must be assigned to a sync wave, which ensures certain resources are in a healthy status before other resources are synced.
+# Applications with a lower sync wave are evaluated and synced first. Waves can be negative to ensure applications on those waves are synced before all others.
+
+istio:
+  wave: "0"
+  namespace: istio-system
+  ignoreDifferences: 
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    jsonPointers:
+    - /webhooks/0/clientConfig/caBundle
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    jsonPointers:
+    - /webhooks/0/clientConfig/caBundle
+    - /webhooks/0/failurePolicy
+
+aws-ebs-csi-driver:
+  wave: "0"
+  namespace: kube-system
+
+ingress:
+  wave: "1"
+  namespace: istio-system
+
+cert-manager:
+  wave: "1"
+  namespace: cert-manager
+
+psql-operator:
+  wave: "1"
+  namespace: psql-operator
+
+minio-operator:
+  wave: "1"
+  namespace: minio-operator
+
+monitoring:
+  wave: "2"
+  namespace: monitoring
+
+twistlock:
+  wave: "2"
+  namespace: twistlock
+
+eck:
+  wave: "2"
+  namespace: elastic
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    kind: ValidatingWebhookConfiguration
+    jsonPointers:
+    - /webhooks
+  - group: apiextensions.k8s.io
+    kind: CustomResourceDefinition
+    jsonPointers:
+    - /status
+
+vault:
+  wave: "2"
+  namespace: vault
+
+anchore:
+  wave: "4"
+  namespace: anchore
+
+rancher:
+  wave: "4"
+  namespace: cattle-system
+  ignoreDifferences: 
+  - group: extensions
+    kind: Ingress
+    jsonPointers:
+    - /status
+
+gitlab:
+  wave: "4"
+  namespace: gitlab
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    version: v1
+    jsonPointers:
+    - /spec/replicas
+    - /spec/template/spec/containers/0/imagePullPolicy
+
+mattermost:
+  wave: "4"
+  namespace: mattermost
+
+jira:
+  wave: "4"
+  namespace: jira
+
+harbor:
+  wave: "4"
+  namespace: harbor
+
+sonarqube:
+  wave: "4"
+  namespace: sonarqube
+
+artifactory:
+  wave: "4"
+  namespace: artifactory
+
+nexus:
+  wave: "4"
+  namespace: nexus
+
+tenant-projects:
+  wave: "4"
+  namespace: "argocd"
+
+keel:
+  wave: "4"
+  namespace: "keel"
+
+keycloak:
+  wave: "4"
+  namespace: "keycloak"
+
+atlantis:
+  wave: "4"
+  namespace: "atlantis"
