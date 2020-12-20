@@ -5,4 +5,4 @@ resources:
 - ../../base
 
 patch:
-- argocd-cm.yaml
+- ./patches/github.yaml
